@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  # go-webserver:   ##### USE THIS WHEN GO FILE IS READY
+    # build: ./app  ##### CHECK IF PORTS ARE OKAY
+    # ports:
+      # - 3000:3000
+    # volumes:
+      # - ./app:/app
+    # environment:
+    #   MYSQL_HOST: mysql
+    #   MYSQL_USER: root
+    #   MYSQL_PASSWORD: secret
+    #   MYSQL_DB: todos
+
+  mysql:  # https://github.com/IvoNet/docker-mysql
+    image: mysql:8.0
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./mysql-dump:/docker-entrypoint-initdb.d
+      # - ./mysql-dump:/docker-entrypoint-initdb.d
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: blog
+
+volumes:
+  mysql-data:
